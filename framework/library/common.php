@@ -16,6 +16,9 @@ function url($uri,$params = array()){
     else{
         $url = "/" . $uri;
     }
+  	$url = str_replace("//","/",$url);
+  	$url = str_replace("//","/",$url);
+    $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . $url;
     return $url;
 }
 
