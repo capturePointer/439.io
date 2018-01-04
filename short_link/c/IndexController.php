@@ -77,21 +77,8 @@ class IndexController extends Controller
     {
         $segments = getUriSegments();
         $urlHashId = $segments[1];
-        $hashId = new HashId();
-        $id = $hashId->decode($urlHashId);
-        if (!$id) {
-            header('http/1.1 404');
-            return;
-        }
-
-        $this->database->prepare("SELECT url FROM short_link WHERE `id` = ?;");
-        $this->database->execute($id);
-        $result = $this->database->results();
-        if (!$result) {
-            header('http/1.1 404');
-            return;
-        }
-        $url = $result[0]['url'];
+        $httpProtocal = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $url = $httpProtocal . $_SERVER['HTTP_HOST'] . '/' . $urlHashId;
 
         $qrCode = new QrCode($url);
         header('Content-Type: ' . $qrCode->getContentType());
