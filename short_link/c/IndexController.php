@@ -61,7 +61,6 @@ class IndexController extends Controller
                 'hash_id' => (new HashId())->encode($result[0]['id']),
             ]);
         }
-		exit("dfdsfds");
 
         $id = $this->database
             ->prepare("INSERT INTO `short_link` (url,url_hash, created_at) VALUES (?,?,?);")
