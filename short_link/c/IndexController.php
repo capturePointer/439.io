@@ -56,7 +56,7 @@ class IndexController extends Controller
         $result = $this->database->results();
         if (!empty($result[0]['id'])) {
             return $this->ajax([
-                'hash_id' => $result[0]['id'],
+                'hash_id' => (new HashId())->encode($result[0]['id']),
             ]);
         }
 
@@ -76,9 +76,13 @@ class IndexController extends Controller
     public function qr()
     {
         $segments = getUriSegments();
-        $urlHashId = $segments[0];
+        $urlHashId = $segments[1];
         $hashId = new HashId();
         $id = $hashId->decode($urlHashId);
+        if (!$id) {
+            header('http/1.1 404');
+            return;
+        }
 
         $this->database->prepare("SELECT url FROM short_link WHERE `id` = ?;");
         $this->database->execute($id);
