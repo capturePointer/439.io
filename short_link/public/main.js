@@ -20,7 +20,7 @@ $(function() {
         $('.output a').attr('href', url).text(url);
         $('.output button').attr('data-clipboard-text', url);
         //$('.content img').attr('src', $(".content img").attr("data-src-pre") + '/' + shortId);
-        $('.content img').attr('src', '//490.io/qr/' + shortId);
+        $('.content img').attr('src', '//'+ location.host +'/qr/' + shortId);
     };
     $('.input button').on('click', function() {
         $('.output').hide();
