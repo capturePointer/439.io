@@ -1,5 +1,5 @@
 <?php
-class ShortLinkController extends Controller{
+class IndexController extends Controller{
         protected function _init(){
             parent::_init();
             echo "init<br>";
