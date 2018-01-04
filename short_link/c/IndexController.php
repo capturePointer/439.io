@@ -5,8 +5,8 @@ use Endroid\QrCode\QrCode;
 
 class IndexController extends Controller
 {
-    public const ERROR_OK = 0;
-    public const ERROR_ILLEGAL_URL = 1;
+    const ERROR_OK = 0;
+    const ERROR_ILLEGAL_URL = 1;
     /**
      * @var Mysqli_Database
      */
@@ -14,6 +14,8 @@ class IndexController extends Controller
 
     public function __construct()
     {
+		error_reporting(E_ALL); 
+		ini_set("display_errors", 1); 
         global $configs;
         $this->database = Mysqli_Database::getIntance($configs['db']['mysqli']);
     }
@@ -59,6 +61,7 @@ class IndexController extends Controller
                 'hash_id' => (new HashId())->encode($result[0]['id']),
             ]);
         }
+		exit("dfdsfds");
 
         $id = $this->database
             ->prepare("INSERT INTO `short_link` (url,url_hash, created_at) VALUES (?,?,?);")
@@ -87,7 +90,7 @@ class IndexController extends Controller
 
     protected function ajax($data, $error = self::ERROR_OK, $message = '')
     {
-        header('application/json; charset=utf-8');
+        header('content-type:application/json;charset=utf8');
         $jsonData = [
             'error' => $error,
             'message' => $message,

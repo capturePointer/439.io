@@ -15,26 +15,28 @@ $(function() {
     validateUrl();
 
     var setOutput = function(shortId) {
-        var url = location.protocol + '//' + location.host + '/' + shortId;
+        var url = $('.output a').attr("data-url-pre") + '/' + shortId;
         $('.output a').attr('href', url).text(url);
         $('.output button').attr('data-clipboard-text', url);
-        $('.content img').attr('src', '//490.io/qr/' + shortId);
+        $('.content img').attr('src', $(".content img").attr("data-src-pre") + '/' + shortId);
     };
     $('.input button').on('click', function() {
         $('.output').hide();
         $('.content img').hide();
         $('#load').show();
         var longUrl = $('.input input').val();
-        $.post('/create', {
+		var postUrl = $("#btn-go").attr("data-url");
+        $.post(postUrl, {
             url: longUrl
         }, function(data) {
-            var data = eval('(' + data + ')');
+            //var data = eval('(' + data + ')');
             $('#load').hide();
             if (data && 0==data['error']) {
                 setOutput(data['data']['hash_id']);
                 $('.output').show();
                 $('.content img').show();
             }
-        });
+        },
+		'json');
     });
 });

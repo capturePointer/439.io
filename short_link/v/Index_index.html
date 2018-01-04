@@ -20,13 +20,13 @@
     <div class="content">
         <div class="input">
             <input placeholder="Please enter the URL"/>
-            <button disabled>Go</button>
+            <button id="btn-go" disabled data-url="<?php print url('create'); ?>">Go</button>
         </div>
         <div class="output">
-            <a href="#" target="_blank"></a>
+            <a href="#" data-url-pre="<?php print url('/'); ?>" target="_blank"></a>
             <button data-clipboard-text="">Copy</button>
         </div>
-        <img width="150"/>
+        <img width="150" data-src-pre="<?php print url('qr'); ?>"/>
         <div id="load">
             <div>G</div>
             <div>N</div>
@@ -43,7 +43,7 @@
 </div>
 <script src="//cdnjs.int64ago.org/ajax/libs/jquery/2.2.0/jquery.js"></script>
 <script src="//cdnjs.int64ago.org/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"></script>
-<script src="main.js"></script>
+<script src="main.js?v=1"></script>
 </body>
 
 </html>
