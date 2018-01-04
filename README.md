@@ -21,6 +21,12 @@ cp config_example.php config.php
 source init.ddl.sql
 ```
 
+* Web服务配置
+```
+root short_link/public
+index index.php
+```
+
 ## What's Next
 * 短链生成api
 * 静态资源整理
