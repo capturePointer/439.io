@@ -32,7 +32,7 @@ class IndexController extends Controller
 
         $this->database->prepare("SELECT url FROM short_link WHERE `id` = ?;");
         $this->database->execute($id);
-        $result= $this->database->results();
+        $result = $this->database->results();
         if (empty($result[0]['url'])) {
             header('http/1.1 404');
             return;
@@ -45,7 +45,7 @@ class IndexController extends Controller
 
     public function createShort()
     {
-        $url = filter_input(INPUT_POST, FILTER_VALIDATE_URL, 'url');
+        $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
         if (!$url) {
             return $this->ajax([], self::ERROR_ILLEGAL_URL);
         }
@@ -53,7 +53,7 @@ class IndexController extends Controller
         $urlMd5 = md5($url);
         $this->database->prepare("SELECT id FROM short_link WHERE `url_hash` = ?;");
         $this->database->execute($urlMd5);
-        $result= $this->database->results();
+        $result = $this->database->results();
         if (!empty($result[0]['id'])) {
             return $this->ajax([
                 'hash_id' => $result[0]['id'],
@@ -82,7 +82,7 @@ class IndexController extends Controller
 
         $this->database->prepare("SELECT url FROM short_link WHERE `id` = ?;");
         $this->database->execute($id);
-        $result= $this->database->results();
+        $result = $this->database->results();
         if (!$result) {
             header('http/1.1 404');
             return;
