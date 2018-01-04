@@ -18,19 +18,19 @@ $(function() {
         var url = location.protocol + '//' + location.host + '/' + shortId;
         $('.output a').attr('href', url).text(url);
         $('.output button').attr('data-clipboard-text', url);
-        $('.content img').attr('src', '//qr.302.at/chart?chs=150x150&cht=qr&choe=UTF-8&chl=' + url);
+        $('.content img').attr('src', '//490.io/qr/' + shortId);
     };
     $('.input button').on('click', function() {
         $('.output').hide();
         $('.content img').hide();
         $('#load').show();
         var longUrl = $('.input input').val();
-        $.post('/', {
-            longUrl: longUrl
+        $.post('/create', {
+            url: longUrl
         }, function(data) {
             $('#load').hide();
-            if (data && data.is_url) {
-                setOutput(data.short);
+            if (data && 0==data.error) {
+                setOutput(data.data.hash_id);
                 $('.output').show();
                 $('.content img').show();
             }
