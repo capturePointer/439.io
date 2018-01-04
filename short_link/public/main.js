@@ -28,10 +28,10 @@ $(function() {
         $.post('/create', {
             url: longUrl
         }, function(data) {
-            var data = eval(data);
+            var data = eval('(' + data + ')');
             $('#load').hide();
-            if (data && 0==data.error) {
-                setOutput(data.data.hash_id);
+            if (data && 0==data['error']) {
+                setOutput(data['data']['hash_id']);
                 $('.output').show();
                 $('.content img').show();
             }
