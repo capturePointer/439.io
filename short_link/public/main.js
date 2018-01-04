@@ -15,10 +15,12 @@ $(function() {
     validateUrl();
 
     var setOutput = function(shortId) {
-        var url = $('.output a').attr("data-url-pre") + '/' + shortId;
+        //var url = $('.output a').attr("data-url-pre") + '/' + shortId;
+        var url = location.protocol + '//' + location.host + '/' + shortId;
         $('.output a').attr('href', url).text(url);
         $('.output button').attr('data-clipboard-text', url);
-        $('.content img').attr('src', $(".content img").attr("data-src-pre") + '/' + shortId);
+        //$('.content img').attr('src', $(".content img").attr("data-src-pre") + '/' + shortId);
+        $('.content img').attr('src', '//490.io/qr/' + shortId);
     };
     $('.input button').on('click', function() {
         $('.output').hide();
