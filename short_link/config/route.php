@@ -12,8 +12,8 @@
  *      ':all' => '.*'
  */
 Router::get('/', 'Index@index');
-Router::get('/:any', 'Index@index');
-Router::get('page', 'Index@page');
-Router::get('view/(:num)', 'Index@view');
+Router::get('/:any', 'Index@recover');
+Router::post('/create', 'Index@createShort');
+Router::get('qr/:any', 'Index@qr');
 
 

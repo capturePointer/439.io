@@ -1,0 +1,6 @@
+{
+  "require":{
+    "yison/hash-id": "~1.0",
+    "endroid/qr-code": "~3.1.1"
+  }
+}
